@@ -2,6 +2,7 @@ package com.ToDo.ui.views.storefront;
 
 import java.util.stream.Stream;
 
+import com.ToDo.backend.data.entity.UserSession;
 import com.ToDo.ui.utils.BakeryConst;
 import com.ToDo.ui.views.EntityView;
 import com.ToDo.ui.views.orderedit.OrderDetails;
@@ -10,6 +11,10 @@ import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.ToDo.backend.data.entity.util.EntityUtil;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.HasValue;
@@ -31,6 +36,8 @@ import com.ToDo.backend.data.entity.Order;
 import com.ToDo.ui.MainView;
 import com.ToDo.ui.components.SearchBar;
 
+import javax.annotation.PostConstruct;
+
 @Tag("storefront-view")
 @JsModule("./src/views/storefront/storefront-view.js")
 @Route(value = BakeryConst.PAGE_STOREFRONT, layout = MainView.class)
@@ -39,6 +46,7 @@ import com.ToDo.ui.components.SearchBar;
 @PageTitle(BakeryConst.TITLE_STOREFRONT)
 public class StorefrontView extends PolymerTemplate<TemplateModel>
 		implements HasLogger, HasUrlParameter<Long>, EntityView<Order> {
+
 
 	@Id("search")
 	private SearchBar searchBar;
@@ -58,10 +66,17 @@ public class StorefrontView extends PolymerTemplate<TemplateModel>
 	private final OrderPresenter presenter;
 
 	@Autowired
+	UserSession userSession;
+
+
+	@Autowired
 	public StorefrontView(OrderPresenter presenter, OrderEditor orderEditor) {
 		this.presenter = presenter;
 		this.orderEditor = orderEditor;
 
+//		Div div = new Div();
+//		div.setText("Hello " + userSession.getUser().getFirstName() + " " + userSession.getUser().getLastName());
+//		div.getElement().getStyle().set("font-size", "xx-large");
 		searchBar.setActionText("New order");
 		searchBar.setCheckboxText("Show past orders");
 		searchBar.setPlaceHolder("Search");

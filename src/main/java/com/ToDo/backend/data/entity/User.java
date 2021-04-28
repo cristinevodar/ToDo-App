@@ -20,8 +20,8 @@ public class User extends AbstractEntity {
 	@Column(unique = true)
 	private String email;
 
-	@NotNull
-	@Size(min = 4, max = 255)
+
+
 	private String passwordHash;
 
 	@NotBlank
@@ -32,10 +32,16 @@ public class User extends AbstractEntity {
 	@Size(max = 255)
 	private String lastName;
 
-	@NotBlank
+
 	@Size(max = 255)
 	private String role;
 
+	public User(String firstName, String lastName, String email )
+	{
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.email=email;
+	}
 	private boolean locked = false;
 
 	@PrePersist

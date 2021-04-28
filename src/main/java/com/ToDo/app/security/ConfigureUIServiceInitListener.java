@@ -2,7 +2,7 @@ package com.ToDo.app.security;
 
 import com.ToDo.ui.components.OfflineBanner;
 import com.ToDo.ui.exceptions.AccessDeniedException;
-import com.ToDo.ui.views.login.LoginView;
+import com.ToDo.ui.views.login.LoginScreen;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
@@ -38,7 +38,7 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
 			if (SecurityUtils.isUserLoggedIn()) {
 				event.rerouteToError(AccessDeniedException.class);
 			} else {
-				event.rerouteTo(LoginView.class);
+				event.rerouteTo(LoginScreen.class);
 			}
 		}
 	}

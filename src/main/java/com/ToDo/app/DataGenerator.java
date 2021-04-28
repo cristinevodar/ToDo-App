@@ -327,11 +327,11 @@ public class DataGenerator implements HasLogger {
 
 	private User createBaker(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return userRepository.save(
-				createUser("baker@vaadin.com", "Heidi", "Carter", passwordEncoder.encode("baker"), Role.BAKER, false));
+				createUser("cristian@todoapp.com", "cristi", "nevodar", passwordEncoder.encode("baker"), Role.BAKER, true));
 	}
 
 	private User createBarista(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return userRepository.save(createUser("barista@vaadin.com", "Malin", "Castro",
+		return userRepository.save(createUser("daniel@vaadin.com", "daniel", "Castro",
 				passwordEncoder.encode("barista"), Role.BARISTA, true));
 	}
 

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.ToDo.ui.views.errors.AccessDeniedView;
 import com.ToDo.ui.views.errors.CustomRouteNotFoundError;
-import com.ToDo.ui.views.login.LoginView;
+import com.ToDo.ui.views.login.LoginScreen;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -57,7 +57,7 @@ public final class SecurityUtils {
 	 * @return true if access is granted, false otherwise.
 	 */
 	public static boolean isAccessGranted(Class<?> securedClass) {
-		final boolean publicView = LoginView.class.equals(securedClass)
+		final boolean publicView = LoginScreen.class.equals(securedClass)
 			|| AccessDeniedView.class.equals(securedClass)
 			|| CustomRouteNotFoundError.class.equals(securedClass);
 

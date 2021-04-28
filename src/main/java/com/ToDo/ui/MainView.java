@@ -1,5 +1,6 @@
 package com.ToDo.ui;
 
+//import com.ToDo.app.security.SecurityUtils;
 import com.ToDo.app.security.SecurityUtils;
 import com.ToDo.ui.utils.BakeryConst;
 import com.ToDo.ui.views.HasConfirmation;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Viewport(BakeryConst.VIEWPORT)
-@PWA(name = "Bakery App Starter", shortName = "Vaadin Demo Bakery App",
+@PWA(name = "ToDo-App Starter", shortName = "ToDo App",
 		startPath = "login",
 		backgroundColor = "#227aef", themeColor = "#227aef",
 		offlinePath = "offline-page.html",
@@ -45,7 +46,7 @@ public class MainView extends AppLayout {
 		confirmDialog.setCancelButtonTheme("raised tertiary");
 
 		this.setDrawerOpened(false);
-		Span appName = new Span("Vaadin Demo Bakery App");
+		Span appName = new Span("To Do App");
 		appName.addClassName("hide-on-mobile");
 
 		menu = createMenuTabs();
