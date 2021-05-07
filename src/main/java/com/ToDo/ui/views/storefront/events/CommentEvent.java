@@ -6,13 +6,18 @@ import com.vaadin.flow.component.ComponentEvent;
 public class CommentEvent extends ComponentEvent<OrderDetails> {
 
 	private Long orderId;
+	private Long toDoItemId;
 	private String message;
+
+
 
 	public CommentEvent(OrderDetails component, Long orderId, String message) {
 		super(component, false);
 		this.orderId = orderId;
 		this.message = message;
 	}
+
+
 
 	public Long getOrderId() {
 		return orderId;

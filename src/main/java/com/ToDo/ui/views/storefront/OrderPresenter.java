@@ -33,8 +33,7 @@ public class OrderPresenter {
 	private final OrderService orderService;
 
 	@Autowired
-	OrderPresenter(OrderService orderService, OrdersGridDataProvider dataProvider,
-			EntityPresenter<Order, StorefrontView> entityPresenter, CurrentUser currentUser) {
+	OrderPresenter(OrderService orderService, OrdersGridDataProvider dataProvider, EntityPresenter<Order, StorefrontView> entityPresenter, CurrentUser currentUser) {
 		this.orderService = orderService;
 		this.entityPresenter = entityPresenter;
 		this.dataProvider = dataProvider;

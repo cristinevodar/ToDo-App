@@ -26,7 +26,6 @@ import com.ToDo.ui.crud.AbstractBakeryCrudView;
 
 @Route(value = BakeryConst.PAGE_USERS, layout = MainView.class)
 @PageTitle(BakeryConst.TITLE_USERS)
-@Secured(Role.ADMIN)
 public class UsersView extends AbstractBakeryCrudView<User> {
 
 	@Autowired

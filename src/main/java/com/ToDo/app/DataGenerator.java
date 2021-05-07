@@ -55,8 +55,8 @@ public class DataGenerator implements HasLogger {
 
 	@Autowired
 	public DataGenerator(OrderRepository orderRepository, UserRepository userRepository,
-			ProductRepository productRepository, PickupLocationRepository pickupLocationRepository,
-			PasswordEncoder passwordEncoder) {
+						 ProductRepository productRepository, PickupLocationRepository pickupLocationRepository,
+						 PasswordEncoder passwordEncoder) {
 		this.orderRepository = orderRepository;
 		this.userRepository = userRepository;
 		this.productRepository = productRepository;
@@ -110,7 +110,7 @@ public class DataGenerator implements HasLogger {
 	}
 
 	private void createOrders(OrderRepository orderRepo, Supplier<Product> productSupplier,
-			Supplier<PickupLocation> pickupLocationSupplier, User barista, User baker) {
+							  Supplier<PickupLocation> pickupLocationSupplier, User barista, User baker) {
 		int yearsToInclude = 2;
 		LocalDate now = LocalDate.now();
 		LocalDate oldestDate = LocalDate.of(now.getYear() - yearsToInclude, 1, 1);
@@ -137,7 +137,7 @@ public class DataGenerator implements HasLogger {
 	}
 
 	private Order createOrder(Supplier<Product> productSupplier, Supplier<PickupLocation> pickupLocationSupplier,
-			User barista, User baker, LocalDate dueDate) {
+							  User barista, User baker, LocalDate dueDate) {
 		Order order = new Order(barista);
 
 		fillCustomer(order.getCustomer());
@@ -327,11 +327,11 @@ public class DataGenerator implements HasLogger {
 
 	private User createBaker(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return userRepository.save(
-				createUser("cristian@todoapp.com", "cristi", "nevodar", passwordEncoder.encode("baker"), Role.BAKER, true));
+				createUser("baker@vaadin.com", "Heidi", "Carter", passwordEncoder.encode("baker"), Role.BAKER, false));
 	}
 
 	private User createBarista(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return userRepository.save(createUser("daniel@vaadin.com", "daniel", "Castro",
+		return userRepository.save(createUser("barista@vaadin.com", "Malin", "Castro",
 				passwordEncoder.encode("barista"), Role.BARISTA, true));
 	}
 
@@ -348,7 +348,7 @@ public class DataGenerator implements HasLogger {
 	}
 
 	private User createUser(String email, String firstName, String lastName, String passwordHash, String role,
-			boolean locked) {
+							boolean locked) {
 		User user = new User();
 		user.setEmail(email);
 		user.setFirstName(firstName);

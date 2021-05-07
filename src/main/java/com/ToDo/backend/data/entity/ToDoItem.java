@@ -1,34 +1,54 @@
 package com.ToDo.backend.data.entity;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class ToDoItem extends AbstractEntity {
+@AllArgsConstructor
+public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
 
-    public enum Status {
-        Finished, InProgress, NotStarted
-    }
+
 
     private String title;
     private String description;
     private String priority;
-    private String deadline;
-    private ToDoItem.Status status;
+    private LocalDate dueDate;
+    private LocalTime dueTime;
+    private Status status;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OrderColumn
+//    @JoinColumn
+   // private List<HistoryItem> history;
+
+//    public void addHistoryItem(User createdBy, String comment) {
+//        HistoryItem item = new HistoryItem(createdBy, comment);
+//        if (history == null) {
+//            history = new LinkedList<>();
+//        }
+//        history.add(item);
+//    }
+    public void addHistoryItem(User createdBy, String comment) {
+        return ;
+    }
 
 
 
-    public ToDoItem(String title, String description, String priority, String deadline, ToDoItem.Status status) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.deadline = deadline;
+    public void changeStatus(User user, Status status) {
+        boolean createHistory = this.status != status && this.status != null && status != null;
         this.status = status;
+        if (createHistory) {
+            addHistoryItem(user, "Task " + status);
+        }
     }
 }

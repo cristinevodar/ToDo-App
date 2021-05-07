@@ -23,7 +23,7 @@ import java.util.Currency;
 
 @Route(value = BakeryConst.PAGE_PRODUCTS, layout = MainView.class)
 @PageTitle(BakeryConst.TITLE_PRODUCTS)
-@Secured(Role.ADMIN)
+
 public class ProductsView extends AbstractBakeryCrudView<Product> {
 
 	private CurrencyFormatter currencyFormatter = new CurrencyFormatter();

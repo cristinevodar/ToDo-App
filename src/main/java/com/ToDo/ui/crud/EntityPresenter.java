@@ -14,11 +14,15 @@ import com.ToDo.backend.service.UserFriendlyDataException;
 import com.ToDo.ui.utils.messages.CrudErrorMessage;
 import com.ToDo.ui.utils.messages.Message;
 import com.ToDo.ui.views.EntityView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
 
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+import org.springframework.stereotype.Component;
+
+
 
 public class EntityPresenter<T extends AbstractEntity, V extends EntityView<T>>
 	implements HasLogger {

@@ -8,6 +8,7 @@ import com.ToDo.ui.views.admin.products.ProductsView;
 import com.ToDo.ui.views.admin.users.UsersView;
 import com.ToDo.ui.views.dashboard.DashboardView;
 import com.ToDo.ui.views.storefront.StorefrontView;
+import com.ToDo.ui.views.tasks.TasksView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -92,16 +93,18 @@ public class MainView extends AppLayout {
 	}
 
 	private static Tab[] getAvailableTabs() {
-		final List<Tab> tabs = new ArrayList<>(4);
+		final List<Tab> tabs = new ArrayList<>(6);
 		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_STOREFRONT,
 						StorefrontView.class));
 		tabs.add(createTab(VaadinIcon.CLOCK, BakeryConst.TITLE_DASHBOARD, DashboardView.class));
-		if (SecurityUtils.isAccessGranted(UsersView.class)) {
-			tabs.add(createTab(VaadinIcon.USER, BakeryConst.TITLE_USERS, UsersView.class));
-		}
-		if (SecurityUtils.isAccessGranted(ProductsView.class)) {
+
+		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_TASKS,
+				TasksView.class));
+		tabs.add(createTab(VaadinIcon.USER, BakeryConst.TITLE_USERS, UsersView.class));
+
+
 			tabs.add(createTab(VaadinIcon.CALENDAR, BakeryConst.TITLE_PRODUCTS, ProductsView.class));
-		}
+
 		final String contextPath = VaadinServlet.getCurrent().getServletContext().getContextPath();
 		final Tab logoutTab = createTab(createLogoutLink(contextPath));
 		tabs.add(logoutTab);
