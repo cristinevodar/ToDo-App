@@ -8,6 +8,7 @@ import '@vaadin/vaadin-text-field/src/vaadin-text-field.js';
 import '../../components/buttons-bar.js';
 import '../../components/utils-mixin.js';
 import '../../../styles/shared-styles.js';
+import '../tasks/task-status-badge.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
   static get template() {
@@ -72,6 +73,9 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
       }
 
 
+        task-status-badge[small] {
+        margin-left: 0.5em;
+      }
 
 
 
@@ -98,7 +102,7 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
 
     <div class="scrollable main-row" id="main">
       <div class="meta-row">
-        <order-status-badge status="[[item.state]]"></order-status-badge>
+        <task-status-badge status="[[item.status]]"></task-status-badge>
         <span class="dim">Order #[[item.id]]</span>
       </div>
 
@@ -118,15 +122,29 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
         </vaadin-form-item>
 
         <vaadin-form-item colspan="2">
-          <label slot="label">Customer</label>
-          <h3>[[item.customer.fullName]]</h3>
+          <label slot="label">Title</label>
+          <h3>[[item.title]]</h3>
         </vaadin-form-item>
 
         <vaadin-form-item>
-          <label slot="label">Phone number</label>
-          <h3>[[item.customer.phoneNumber]]</h3>
+          <label slot="label">Status</label>
+          <h3>[[item.status]]</h3>
         </vaadin-form-item>
+
+        <vaadin-form-item colspan="2">
+                  <label slot="label">Priority</label>
+                  <h3>[[item.priority]]</h3>
+                </vaadin-form-item>
+
+
+                 <vaadin-form-item colspan="2">
+                  <label slot="label">Description</label>
+                  <h3>[[item.description]]</h3>
+                  </vaadin-form-item>
       </vaadin-form-layout>
+
+
+
 
       <vaadin-form-layout id="form3">
         <div></div>
@@ -142,7 +160,7 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
               <div class="history-line">
                 <span class="bold">[[event.createdBy.firstName]]</span>
                 <span class="secondary">[[event.timestamp]]</span>
-                <order-status-badge status="[[event.newState]]" small=""></order-status-badge>
+                <task-status-badge status="[[event.newState]]" small=""></task-status-badge>
               </div>
               <div class="comment">[[event.message]]</div>
             </template>

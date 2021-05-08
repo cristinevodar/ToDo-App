@@ -1,5 +1,6 @@
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '../../../styles/shared-styles.js';
+import './task-status-badge.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class TaskCard extends PolymerElement {
   static get template() {
@@ -59,21 +60,21 @@ class TaskCard extends PolymerElement {
         flex: 1;
       }
 
-      .place,
+
       .secondary-time,
       .full-day,
       .goods {
         color: var(--lumo-secondary-text-color);
       }
 
-      .time,
-      .name,
+
+      .title,
       .short-day,
       .month {
         margin: 0;
       }
 
-      .name {
+      .title {
         word-break: break-all;
         /* Non standard for WebKit */
         word-break: break-word;
@@ -146,17 +147,10 @@ class TaskCard extends PolymerElement {
           </div>
         </div>
         <div class="name-items">
-                  <h3 class="name">[[orderCard.title]]</h3>
-                  <div class="goods">
-                    <template is="dom-repeat" items="[[taskCard.items]]">
-                      <div class="goods-item">
-                        <span class="count">[[item.quantity]]</span>
-                      </div>
-                    </template>
-                  </div>
-                </div>
-      </div>
-    </div>
+                  <h3 class="title">[[taskCard.title]]</h3>
+                  <task-status-badge status=[[taskCard.status]]></task-status-badge>
+
+            </div>
 `;
   }
 

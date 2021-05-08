@@ -16,20 +16,24 @@ class TaskStatusBadge extends PolymerElement {
         text-transform: capitalize;
       }
 
-      :host([status="INPROGRESS"]) #wrapper {
+      :host([status="inprogress"]) #wrapper {
         color: var(--lumo-success-color);
         background: var(--lumo-success-color-10pct);
       }
 
-      :host([status="NEW"]) #wrapper {
+      :host([status="new"]) #wrapper {
         color: var(--lumo-primary-color);
         background: var(--lumo-primary-color-10pct);
       }
 
-      :host([status="FINISHED"]) #wrapper {
-        color: var(--lumo-error-color);
-        background: var(--lumo-error-color-10pct);
-      }
+      :host([status="finished"]) #wrapper {
+              padding: 2px 8px;
+            }
+
+      :host([status="finished"]) #wrapper span,
+           :host(:not([status="finished"])) #wrapper iron-icon {
+              display: none;
+            }
 
 
 

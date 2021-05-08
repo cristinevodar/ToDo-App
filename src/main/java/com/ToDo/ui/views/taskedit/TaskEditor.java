@@ -157,7 +157,7 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
         binder.readBean(toDoItem);
 
         this.taskNumber.setText(isNew ? "" : toDoItem.getId().toString());
-        title.setVisible(isNew);
+        taskTitle.setVisible(isNew);
         metaContainer.setVisible(!isNew);
 
         if (toDoItem.getStatus() != null) {

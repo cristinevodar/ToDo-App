@@ -40,7 +40,7 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
     </style>
 
     <div class="scrollable flex1" id="main">
-      <h2 id="taskTitle">New order</h2>
+      <h2 id="taskTitle">New Task</h2>
 
       <div class="meta-row" id="metaContainer">
         <vaadin-combo-box class="status" id="status"></vaadin-combo-box>
@@ -55,7 +55,6 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
           <vaadin-combo-box id="dueTime">
             <iron-icon slot="prefix" icon="vaadin:clock"></iron-icon>
           </vaadin-combo-box>
-
         </vaadin-form-layout>
 
         <vaadin-form-layout id="form3" colspan="3">
@@ -64,7 +63,7 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
           </vaadin-text-field>
 
 
-          <vaadin-text-field id="description" label="Additional Details" colspan="2"></vaadin-text-field>
+          <vaadin-text-field id="description" label="Description" colspan="2"></vaadin-text-field>
 
           <vaadin-text-field id="priority" label="Priority" colspan="2"></vaadin-text-field>
 

@@ -2,6 +2,7 @@ package com.ToDo.ui.views.tasks;
 
 import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.data.entity.ToDoItemSummary;
+import com.ToDo.ui.utils.converters.StatusConverter;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 
 import java.time.LocalDate;
@@ -29,12 +30,15 @@ public class TaskCard {
 
     private final ToDoItemSummary task;
 
+    private static StatusConverter statusConverter = new StatusConverter();
+
     public TaskCard(ToDoItemSummary task) {
         this.task = task;
         LocalDate now = LocalDate.now();
         LocalDate date = task.getDueDate();
         recent = date.equals(now) || date.equals(now.minusDays(1));
         inWeek = !recent && now.getYear() == date.getYear() && now.get(WEEK_OF_YEAR_FIELD) == date.get(WEEK_OF_YEAR_FIELD);
+
     }
 
 
@@ -59,5 +63,12 @@ public class TaskCard {
         return recent || inWeek ? null : WEEKDAY_FULLNAME_FORMATTER.format(task.getDueDate());
     }
 
+    public String getStatus(){
+        return statusConverter.encode(task.getStatus());
+    }
+
+    public String getTitle(){
+        return task.getTitle();
+    }
 
 }

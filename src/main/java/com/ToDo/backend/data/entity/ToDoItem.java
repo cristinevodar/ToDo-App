@@ -13,7 +13,6 @@ import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
 
@@ -42,6 +41,9 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
         return ;
     }
 
+    public ToDoItem(){
+        this.status=Status.NEW;
+    }
 
 
     public void changeStatus(User user, Status status) {

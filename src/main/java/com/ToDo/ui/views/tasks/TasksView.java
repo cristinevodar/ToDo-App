@@ -71,7 +71,7 @@ public class TasksView extends PolymerTemplate<TemplateModel>
 
         getSearchBar().addFilterChangeListener(
                 e -> presenter.filterChanged(getSearchBar().getFilter(), getSearchBar().isCheckboxChecked()));
-        getSearchBar().addActionClickListener(e -> presenter.createNewOrder());
+        getSearchBar().addActionClickListener(e -> presenter.createNewTask());
 
         presenter.init(this);
 

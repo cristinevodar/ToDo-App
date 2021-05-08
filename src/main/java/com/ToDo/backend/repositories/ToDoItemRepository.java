@@ -12,6 +12,8 @@ public interface ToDoItemRepository extends JpaRepository<ToDoItem, Long> {
 
     Page<ToDoItem> findAll(Pageable pageable);
 
+
+
     Page<ToDoItem> findByTitleContainingIgnoreCaseAndDueDateAfter(String searchQuery, LocalDate localdDate, Pageable pageable);
 
     Page<ToDoItem> findByTitleContainingIgnoreCase(String searchqQery,  Pageable pageable);

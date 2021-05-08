@@ -78,7 +78,7 @@ public class TaskPresenter {
         entityPresenter.loadEntity(id, e -> open(e, edit));
     }
 
-    void createNewOrder() {
+    void createNewTask() {
         open(entityPresenter.createNew(), true);
     }
 

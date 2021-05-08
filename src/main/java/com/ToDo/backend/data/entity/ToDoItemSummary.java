@@ -11,4 +11,8 @@ public interface ToDoItemSummary {
 
     LocalTime getDueTime();
 
+    String getTitle();
+
+    Status getStatus();
+
 }

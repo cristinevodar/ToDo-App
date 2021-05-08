@@ -84,7 +84,7 @@ public class TaskDetails extends PolymerTemplate<TaskDetails.Model> {
     }
 
     public interface Model extends TemplateModel {
-        @Include({ "id", "dueDate.day", "dueDate.weekday", "dueDate.date", "dueTime",
+        @Include({ "id", "dueDate.day", "dueDate.weekday", "dueDate.date", "dueTime", "title",
                 "description", "priority", "status", "history.message", "history.createdBy.firstName",
                 "history.timestamp" })
         @Encode(value = LongToStringConverter.class, path = "id")
