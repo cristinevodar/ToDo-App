@@ -39,7 +39,6 @@ public class TaskPresenter {
         this.entityPresenter = entityPresenter;
         this.dataProvider = dataProvider;
         this.currentUser = currentUser;
-
         headersGenerator= new TaskCardHeaderGenerator();
         headersGenerator.resetHeaderChain(false);
         dataProvider.setPageObserver(p->headersGenerator.tasksRead(p.getContent()));

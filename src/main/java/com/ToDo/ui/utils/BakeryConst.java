@@ -14,6 +14,7 @@ public class BakeryConst {
 	public static final String PAGE_TASKS="tasks";
 	public static final String PAGE_TASKS_EDIT="tasks/edit";
 	public static final String PAGE_DASHBOARD = "dashboard";
+	public static final String PAGE_TASK_DASHBOARD = "taskDashboard";
 	public static final String PAGE_USERS = "users";
 	public static final String PAGE_PRODUCTS = "products";
 

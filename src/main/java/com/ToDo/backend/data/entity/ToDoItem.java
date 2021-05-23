@@ -6,9 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +25,8 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
     private LocalDate dueDate;
     private LocalTime dueTime;
     private Status status;
+
+    private String userEmail;
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @OrderColumn

@@ -33,6 +33,7 @@ public class TasksCountData {
 
     }
 
+
     public TasksCountData(String title, String subtitle, Integer count) {
         this.title = title;
         this.subtitle = subtitle;

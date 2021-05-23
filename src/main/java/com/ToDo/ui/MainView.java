@@ -7,6 +7,7 @@ import com.ToDo.ui.views.HasConfirmation;
 import com.ToDo.ui.views.admin.products.ProductsView;
 import com.ToDo.ui.views.admin.users.UsersView;
 import com.ToDo.ui.views.dashboard.DashboardView;
+import com.ToDo.ui.views.dashboardtask.DashboardTaskView;
 import com.ToDo.ui.views.storefront.StorefrontView;
 import com.ToDo.ui.views.tasks.TasksView;
 import com.vaadin.flow.component.Component;
@@ -100,8 +101,8 @@ public class MainView extends AppLayout {
 
 		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_TASKS,
 				TasksView.class));
+		tabs.add(createTab(VaadinIcon.CLOCK, "TaskDashboard", DashboardTaskView.class));
 		tabs.add(createTab(VaadinIcon.USER, BakeryConst.TITLE_USERS, UsersView.class));
-
 
 			tabs.add(createTab(VaadinIcon.CALENDAR, BakeryConst.TITLE_PRODUCTS, ProductsView.class));
 

@@ -14,7 +14,9 @@ class TasksView extends PolymerElement {
         display: flex;
         flex-direction: column;
         height: 100%;
+
       }
+
     </style>
 
     <search-bar id="search" show-checkbox=""></search-bar>
@@ -43,6 +45,7 @@ class TasksView extends PolymerElement {
     };
     grid.addEventListener('loading-changed', listener);
   }
+
 
   // Workaround for styling the dialog content https://github.com/vaadin/vaadin-dialog-flow/issues/69
   _onDialogOpen(e) {

@@ -72,6 +72,8 @@ public class Order extends AbstractEntity implements OrderSummary {
 	@JoinColumn
 	private List<HistoryItem> history;
 
+
+
 	public Order(User createdBy) {
 		this.state = OrderState.NEW;
 		setCustomer(new Customer());

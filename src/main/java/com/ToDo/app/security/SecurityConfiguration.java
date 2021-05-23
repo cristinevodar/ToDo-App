@@ -43,28 +43,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private static final String LOGIN_URL = "/login";
 	private static final String LOGOUT_URL = "/" + BakeryConst.PAGE_STOREFRONT;
 	private static final String LOGOUT_SUCCESS_URL = "/" + BakeryConst.PAGE_STOREFRONT;
-//
+
 	private final UserDetailsService userDetailsService;
-//
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	UserSession userSession;
-//
+
 	@Autowired
 	public SecurityConfiguration(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
-//
-//	/**
-//	 * The password encoder to use when encrypting passwords.
-//	 */
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-//
+
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public CurrentUser currentUser(UserRepository userRepository) {

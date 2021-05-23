@@ -173,6 +173,7 @@ $_documentContainer.innerHTML = `<dom-module id="bakery-app-layout-theme" theme-
         color: var(--lumo-secondary-text-color);
         background-color: var(--lumo-base-color);
       }
+
     </style>
   </template>
 </dom-module>

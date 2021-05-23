@@ -59,8 +59,6 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
     @Id("metaContainer")
     private Div metaContainer;
 
-    @Id("taskNumber")
-    private Span taskNumber;
 
     @Id("title")
     private TextField title;
@@ -156,7 +154,7 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
     public void read(ToDoItem toDoItem, boolean isNew) {
         binder.readBean(toDoItem);
 
-        this.taskNumber.setText(isNew ? "" : toDoItem.getId().toString());
+
         taskTitle.setVisible(isNew);
         metaContainer.setVisible(!isNew);
 

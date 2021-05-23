@@ -1,16 +1,24 @@
 package com.ToDo.ui.views.tasks;
 
+import com.ToDo.app.security.CurrentUser;
 import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.data.entity.ToDoItemSummary;
+import com.ToDo.backend.data.entity.UserSession;
 import com.ToDo.ui.utils.converters.StatusConverter;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static com.ToDo.ui.utils.FormattingUtils.*;
 
+
 public class TaskCard {
+
+
+
 
     public static TemplateRenderer<ToDoItem> getTemplate() {
         return TemplateRenderer.of(
@@ -22,7 +30,9 @@ public class TaskCard {
     }
 
     public static TaskCard create(ToDoItemSummary toDoItem){//TODO SUMMARY?
+
         return new TaskCard(toDoItem);
+
     }
 
 

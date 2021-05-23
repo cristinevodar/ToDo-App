@@ -103,7 +103,7 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
     <div class="scrollable main-row" id="main">
       <div class="meta-row">
         <task-status-badge status="[[item.status]]"></task-status-badge>
-        <span class="dim">Order #[[item.id]]</span>
+
       </div>
 
       <vaadin-form-layout id="form1">
@@ -184,13 +184,13 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
       <vaadin-button slot="left" id="back" hidden="[[!review]]">Back</vaadin-button>
       <vaadin-button slot="left" id="cancel" hidden="[[review]]">Cancel</vaadin-button>
 
-      <div slot="info" class="total">Total [[item.totalPrice]]</div>
+
 
       <vaadin-button slot="right" id="save" theme="primary success" hidden="[[!review]]">
         <iron-icon icon="vaadin:check" slot="suffix"></iron-icon>
-        Place order</vaadin-button>
+        Place Task</vaadin-button>
       <vaadin-button slot="right" id="edit" theme="primary" hidden="[[review]]">
-        Edit order
+        Edit task
         <iron-icon icon="vaadin:edit" slot="suffix"></iron-icon>
       </vaadin-button>
     </buttons-bar>

@@ -44,7 +44,7 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
 
       <div class="meta-row" id="metaContainer">
         <vaadin-combo-box class="status" id="status"></vaadin-combo-box>
-        <span class="dim">Task #<span id="taskNumber"></span></span>
+
       </div>
 
       <vaadin-form-layout id="form1">
@@ -75,9 +75,9 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
 
     <buttons-bar id="footer" no-scroll\$="[[noScroll]]">
       <vaadin-button slot="left" id="cancel">Cancel</vaadin-button>
-      <div slot="info" class="total">Total [[totalPrice]]</div>
+
       <vaadin-button slot="right" id="review" theme="primary">
-        Review order
+        Review Task
         <iron-icon icon="vaadin:arrow-right" slot="suffix"></iron-icon>
       </vaadin-button>
     </buttons-bar>
