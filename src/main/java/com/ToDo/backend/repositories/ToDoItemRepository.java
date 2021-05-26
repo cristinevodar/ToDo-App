@@ -23,6 +23,8 @@ public interface ToDoItemRepository extends JpaRepository<ToDoItem, Long> {
 
     Page<ToDoItem> findByUserEmailIsIgnoreCaseAndDueDateAfter(String searchQuery,LocalDate filterDate, Pageable pageable);
 
+    List<ToDoItem> findByHashAndUserEmailIsNot(String hash, String email);
+
     long countByTitleContainingIgnoreCaseAndUserEmailIsAndDueDateAfter(String searchQuery, String email, LocalDate dueDate);
 
     long countByTitleContainingIgnoreCaseAndUserEmailIs(String searchQuery, String email);

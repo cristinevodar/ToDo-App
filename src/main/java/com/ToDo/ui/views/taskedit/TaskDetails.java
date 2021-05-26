@@ -45,29 +45,12 @@ public class TaskDetails extends PolymerTemplate<TaskDetails.Model> {
     @Id("edit")
     private Button edit;
 
-    @Id("history")
-    private Element history;
 
-    @Id("comment")
-    private Element comment;
-
-    @Id("sendComment")
-    private Button sendComment;
-
-    @Id("commentField")
-    private TextField commentField;
 
     private boolean isDirty;
 
     public TaskDetails(){
-        sendComment.addClickListener(e -> {
-            String message = commentField.getValue();
-            message = message == null ? "" : message.trim();
-            if (!message.isEmpty()) {
-                commentField.clear();
-                fireEvent(new CommentEvent(this, toDoItem.getId(), message));
-            }
-        });
+
         save.addClickListener(e -> fireEvent(new SaveEvent(this, false)));
         cancel.addClickListener(e -> fireEvent(new CancelEvent(this, false)));
         edit.addClickListener(e -> fireEvent(new EditEvent(this)));
@@ -77,16 +60,13 @@ public class TaskDetails extends PolymerTemplate<TaskDetails.Model> {
         getModel().setReview(review);
         this.toDoItem = toDoItem;
         getModel().setItem(toDoItem);
-        if (!review) {
-            commentField.clear();
-        }
+
         this.isDirty = review;
     }
 
     public interface Model extends TemplateModel {
         @Include({ "id", "dueDate.day", "dueDate.weekday", "dueDate.date", "dueTime", "title",
-                "description", "priority", "status", "history.message", "history.createdBy.firstName",
-                "history.timestamp" })
+                "description", "priority", "status", "users"})
         @Encode(value = LongToStringConverter.class, path = "id")
         @Encode(value = TaskLocalDateConverter.class, path = "dueDate")
         @Encode(value = LocalTimeConverter.class, path = "dueTime")

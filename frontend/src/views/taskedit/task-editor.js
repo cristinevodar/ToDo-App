@@ -67,6 +67,8 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
 
           <vaadin-text-field id="priority" label="Priority" colspan="2"></vaadin-text-field>
 
+          <vaadin-text-field id="users" label="Add Users" colspan="2"></vaadin-text-field>
+
 
         </vaadin-form-layout>
 

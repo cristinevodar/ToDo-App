@@ -154,26 +154,9 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
 
 
 
-          <vaadin-form-item id="history" label-position="top" hidden="[[review]]">
-            <label slot="label">History</label>
-            <template is="dom-repeat" items="[[item.history]]" as="event">
-              <div class="history-line">
-                <span class="bold">[[event.createdBy.firstName]]</span>
-                <span class="secondary">[[event.timestamp]]</span>
-                <task-status-badge status="[[event.newState]]" small=""></task-status-badge>
-              </div>
-              <div class="comment">[[event.message]]</div>
-            </template>
-          </vaadin-form-item>
 
-          <vaadin-form-item id="comment" hidden="[[review]]">
-            <vaadin-text-field id="commentField" placeholder="Add comment" class="full-width" on-keydown="_onCommentKeydown"
-              maxlength="255">
-              <div slot="suffix" class="comment-suffix">
-                <vaadin-button id="sendComment" theme="tertiary">Send</vaadin-button>
-              </div>
-            </vaadin-text-field>
-          </vaadin-form-item>
+
+
 
         </vaadin-form-layout>
       </vaadin-form-layout>

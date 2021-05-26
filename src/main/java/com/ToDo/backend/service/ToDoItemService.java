@@ -26,9 +26,9 @@ public class ToDoItemService implements CrudService<ToDoItem> {
     private final ToDoItemRepository toDoItemRepository;
 
     @Autowired
-    public ToDoItemService(ToDoItemRepository toDoItemRepository){
+    public ToDoItemService(ToDoItemRepository toDoItemRepository) {
         super();
-        this.toDoItemRepository=toDoItemRepository;
+        this.toDoItemRepository = toDoItemRepository;
     }
 
     @Override
@@ -38,7 +38,35 @@ public class ToDoItemService implements CrudService<ToDoItem> {
 
     @Override
     public ToDoItem save(User currentUser, ToDoItem toDoItem) {
-        System.out.println(toDoItem.getDueDate());
+
+        toDoItem.setCreatedBy(currentUser.getEmail());
+        if ( toDoItem.getHash()==null) {
+            if (!toDoItem.getUsers().isEmpty()) {
+                toDoItem.setHash(UUID.randomUUID().toString());
+                ToDoItem task2 = new ToDoItem();
+                task2.setUserEmail(toDoItem.getUsers());
+                task2.setTitle(toDoItem.getTitle());
+                task2.setDescription(toDoItem.getDescription());
+                task2.setPriority(toDoItem.getPriority());
+                task2.setDueTime(toDoItem.getDueTime());
+                task2.setDueDate(toDoItem.getDueDate());
+                task2.setHash(toDoItem.getHash());
+                toDoItemRepository.save(task2);
+            }
+        }
+        else {
+            for ( ToDoItem task2: toDoItemRepository.findByHashAndUserEmailIsNot(toDoItem.getHash(),toDoItem.getUserEmail())){
+                task2.setTitle(toDoItem.getTitle());
+                task2.setDescription(toDoItem.getDescription());
+                task2.setPriority(toDoItem.getPriority());
+                task2.setStatus(toDoItem.getStatus());
+                task2.setDueTime(toDoItem.getDueTime());
+                task2.setDueDate(toDoItem.getDueDate());
+                task2.setHash(toDoItem.getHash());
+                toDoItemRepository.save(task2);
+            }
+        }
+
         return toDoItemRepository.save(toDoItem);
     }
 
@@ -66,33 +94,32 @@ public class ToDoItemService implements CrudService<ToDoItem> {
     }
 
     public Page<ToDoItem> findAnyMatchingAfterDueDate(Optional<String> optionalFilter,
-                                                   Optional<LocalDate> optionalFilterDate, Pageable pageable) {
+                                                      Optional<LocalDate> optionalFilterDate, Pageable pageable) {
 
-        System.out.println(currentUser.getUser().getFirstName());
         if (optionalFilter.isPresent() && !optionalFilter.get().isEmpty()) {
             if (optionalFilterDate.isPresent()) {
                 return toDoItemRepository.findByTitleContainingIgnoreCaseAndDueDateAfterAndUserEmailIs(
-                        optionalFilter.get(), optionalFilterDate.get(),currentUser.getUser().getEmail(), pageable);
+                        optionalFilter.get(), optionalFilterDate.get(), currentUser.getUser().getEmail(), pageable);
             } else {
-                return toDoItemRepository.findByTitleContainingIgnoreCaseAndUserEmailIs(optionalFilter.get(),currentUser.getUser().getEmail(), pageable);
+                return toDoItemRepository.findByTitleContainingIgnoreCaseAndUserEmailIs(optionalFilter.get(), currentUser.getUser().getEmail(), pageable);
             }
         } else {
             if (optionalFilterDate.isPresent()) {
-                return toDoItemRepository.findByUserEmailIsIgnoreCaseAndDueDateAfter(currentUser.getUser().getEmail(),optionalFilterDate.get(), pageable);
+                return toDoItemRepository.findByUserEmailIsIgnoreCaseAndDueDateAfter(currentUser.getUser().getEmail(), optionalFilterDate.get(), pageable);
             } else {
-                return toDoItemRepository.findAllByUserEmailIs(currentUser.getUser().getEmail(),pageable);
+                return toDoItemRepository.findAllByUserEmailIs(currentUser.getUser().getEmail(), pageable);
             }
         }
     }
 
     public long countAnyMatchingAfterDueDate(Optional<String> optionalFilter, Optional<LocalDate> optionalFilterDate) {
         if (optionalFilter.isPresent() && optionalFilterDate.isPresent()) {
-            return toDoItemRepository.countByTitleContainingIgnoreCaseAndUserEmailIsAndDueDateAfter(optionalFilter.get(),currentUser.getUser().getEmail(),
+            return toDoItemRepository.countByTitleContainingIgnoreCaseAndUserEmailIsAndDueDateAfter(optionalFilter.get(), currentUser.getUser().getEmail(),
                     optionalFilterDate.get());
         } else if (optionalFilter.isPresent()) {
-            return toDoItemRepository.countByTitleContainingIgnoreCaseAndUserEmailIs(optionalFilter.get(),currentUser.getUser().getEmail());
+            return toDoItemRepository.countByTitleContainingIgnoreCaseAndUserEmailIs(optionalFilter.get(), currentUser.getUser().getEmail());
         } else if (optionalFilterDate.isPresent()) {
-            return toDoItemRepository.countByDueDateAndUserEmailIs(optionalFilterDate.get(),currentUser.getUser().getEmail());
+            return toDoItemRepository.countByDueDateAndUserEmailIs(optionalFilterDate.get(), currentUser.getUser().getEmail());
         } else {
             return toDoItemRepository.countByUserEmailIs(currentUser.getUser().getEmail());
         }
@@ -111,7 +138,7 @@ public class ToDoItemService implements CrudService<ToDoItem> {
 
     @Transactional
     public List<ToDoItemSummary> findAnyMatchingStartingToday() {
-        return toDoItemRepository.findByDueDateGreaterThanEqualAndUserEmailIs(LocalDate.now(),currentUser.getUser().getEmail());
+        return toDoItemRepository.findByDueDateGreaterThanEqualAndUserEmailIs(LocalDate.now(), currentUser.getUser().getEmail());
     }
 
     @Override
@@ -129,8 +156,8 @@ public class ToDoItemService implements CrudService<ToDoItem> {
         data.setFinishedThisMonth(getFinishedPerDay(month, year));
         data.setFinishedThisYear(getFinishedPerMonth(year));
 
-          Number[][] finishedPerMonth = new Number[3][12];
-          data.setFinishedPerMonth(finishedPerMonth);
+        Number[][] finishedPerMonth = new Number[3][12];
+        data.setFinishedPerMonth(finishedPerMonth);
         List<Object[]> finished = toDoItemRepository.countPerMonthLastThreeYears(Status.FINISHED, currentUser.getUser().getEmail(), year);
 
         for (Object[] finishedData : finished) {
@@ -147,11 +174,11 @@ public class ToDoItemService implements CrudService<ToDoItem> {
 
         LinkedHashMap<Status, Integer> taskStatuses = new LinkedHashMap<>();
         data.setTaskStatus(taskStatuses);
-        long result1= toDoItemRepository.countPerStatusAndEmailIs(Status.NEW, currentUser.getUser().getEmail(), year, month);
+        long result1 = toDoItemRepository.countPerStatusAndEmailIs(Status.NEW, currentUser.getUser().getEmail(), year, month);
         taskStatuses.put(Status.NEW, (int) result1);
-        long result2= toDoItemRepository.countPerStatusAndEmailIs(Status.INPROGRESS, currentUser.getUser().getEmail(), year, month);
+        long result2 = toDoItemRepository.countPerStatusAndEmailIs(Status.INPROGRESS, currentUser.getUser().getEmail(), year, month);
         taskStatuses.put(Status.INPROGRESS, (int) result2);
-        long result3= toDoItemRepository.countPerStatusAndEmailIs(Status.FINISHED, currentUser.getUser().getEmail(), year, month);
+        long result3 = toDoItemRepository.countPerStatusAndEmailIs(Status.FINISHED, currentUser.getUser().getEmail(), year, month);
         taskStatuses.put(Status.FINISHED, (int) result3);
 
 
@@ -162,16 +189,16 @@ public class ToDoItemService implements CrudService<ToDoItem> {
         return flattenAndReplaceMissingWithNull(12, toDoItemRepository.countPerMonth(Status.FINISHED, currentUser.getUser().getEmail(), year));
     }
 
-    private FinishedStats getFinishedStats(){
+    private FinishedStats getFinishedStats() {
         FinishedStats stats = new FinishedStats();
         LocalDate today = LocalDate.now();
-        stats.setDueToday((int) toDoItemRepository.countByDueDateAndUserEmailIs(today,currentUser.getUser().getEmail()));
-        stats.setDueTomorrow((int) toDoItemRepository.countByDueDateAndUserEmailIs(today.plusDays(1),currentUser.getUser().getEmail()));
+        stats.setDueToday((int) toDoItemRepository.countByDueDateAndUserEmailIs(today, currentUser.getUser().getEmail()));
+        stats.setDueTomorrow((int) toDoItemRepository.countByDueDateAndUserEmailIs(today.plusDays(1), currentUser.getUser().getEmail()));
         stats.setFinishedToday((int) toDoItemRepository.countByDueDateAndStatusInAndUserEmailIs(today,
-                Collections.singleton(Status.FINISHED),currentUser.getUser().getEmail()));
+                Collections.singleton(Status.FINISHED), currentUser.getUser().getEmail()));
 
-        stats.setInProgressToday((int) toDoItemRepository.countByDueDateAndStatusInAndUserEmailIs(today, Collections.singleton(Status.INPROGRESS),currentUser.getUser().getEmail()));
-        stats.setNewTasks((int) toDoItemRepository.countByStatusAndUserEmailIs(Status.NEW,currentUser.getUser().getEmail()));
+        stats.setInProgressToday((int) toDoItemRepository.countByDueDateAndStatusInAndUserEmailIs(today, Collections.singleton(Status.INPROGRESS), currentUser.getUser().getEmail()));
+        stats.setNewTasks((int) toDoItemRepository.countByStatusAndUserEmailIs(Status.NEW, currentUser.getUser().getEmail()));
 
         return stats;
     }
@@ -192,7 +219,7 @@ public class ToDoItemService implements CrudService<ToDoItem> {
     private List<Number> getFinishedPerDay(int month, int year) {
         int daysInMonth = YearMonth.of(year, month).lengthOfMonth();
         return flattenAndReplaceMissingWithNull(daysInMonth,
-                toDoItemRepository.countPerDayAndUserEmailIs(Status.FINISHED, year, month,currentUser.getUser().getEmail()));
+                toDoItemRepository.countPerDayAndUserEmailIs(Status.FINISHED, year, month, currentUser.getUser().getEmail()));
     }
 
 

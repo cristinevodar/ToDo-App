@@ -69,6 +69,8 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
     @Id("priority")
     private TextField priority;
 
+    @Id("users")
+    private TextField users;
 
     @Id("status")
     private ComboBox<Status> status;
@@ -120,6 +122,9 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
 
         title.setRequired(true);
         binder.bind(title,"title");
+
+        users.setRequired(false);
+        binder.bind(users,"users");
 
         description.setRequired(false);
         binder.bind(description,"description");
