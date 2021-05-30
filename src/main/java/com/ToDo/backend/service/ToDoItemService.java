@@ -125,11 +125,7 @@ public class ToDoItemService implements CrudService<ToDoItem> {
         }
     }
 
-    @Transactional(rollbackOn = Exception.class)
-    public ToDoItem addComment(User currentUser, ToDoItem task, String comment) {
-        task.addHistoryItem(currentUser, comment);
-        return toDoItemRepository.save(task);
-    }
+
 
     @Override
     public long count() {

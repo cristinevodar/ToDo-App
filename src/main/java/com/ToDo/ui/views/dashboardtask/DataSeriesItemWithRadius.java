@@ -1,4 +1,4 @@
-package com.ToDo.ui.views.dashboard;
+package com.ToDo.ui.views.dashboardtask;
 
 import com.vaadin.flow.component.charts.model.DataSeriesItem;
 

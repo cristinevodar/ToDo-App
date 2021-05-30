@@ -29,6 +29,7 @@ import java.util.stream.Stream;
 @JsModule("./src/views/tasks/tasks-view.js")
 @Route(value = BakeryConst.PAGE_TASKS, layout = MainView.class)
 @RouteAlias(value = BakeryConst.PAGE_TASKS_EDIT, layout = MainView.class)
+@RouteAlias(value = BakeryConst.PAGE_ROOT, layout = MainView.class)
 @PageTitle(BakeryConst.TITLE_TASKS)
 public class TasksView extends PolymerTemplate<TemplateModel>
         implements HasLogger, HasUrlParameter<Long>, EntityView<ToDoItem> {

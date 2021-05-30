@@ -4,6 +4,7 @@ import com.ToDo.app.security.CurrentUser;
 import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.data.entity.ToDoItemSummary;
 import com.ToDo.backend.data.entity.UserSession;
+import com.ToDo.ui.utils.converters.PriorityConverter;
 import com.ToDo.ui.utils.converters.StatusConverter;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -42,6 +43,7 @@ public class TaskCard {
 
     private static StatusConverter statusConverter = new StatusConverter();
 
+    private static PriorityConverter priorityConverter= new PriorityConverter();
     public TaskCard(ToDoItemSummary task) {
         this.task = task;
         LocalDate now = LocalDate.now();
@@ -81,4 +83,5 @@ public class TaskCard {
         return task.getTitle();
     }
 
+    public String getPriority(){ return priorityConverter.encode(task.getPriority()); }
 }

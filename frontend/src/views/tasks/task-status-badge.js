@@ -17,7 +17,7 @@ class TaskStatusBadge extends PolymerElement {
       }
 
       :host([status="inprogress"]) #wrapper {
-        color: var(--lumo-success-color);
+        color: var(--lumo-yellow-color);
         background: var(--lumo-success-color-10pct);
       }
 
@@ -26,14 +26,12 @@ class TaskStatusBadge extends PolymerElement {
         background: var(--lumo-primary-color-10pct);
       }
 
-      :host([status="finished"]) #wrapper {
-              padding: 2px 8px;
+      :host([status="finished"]) #wrapper , #wrapper2{
+             color: var(--lumo-success-color);
+             background: var(--lumo-success-color-10pct);
             }
 
-      :host([status="finished"]) #wrapper span,
-           :host(:not([status="finished"])) #wrapper iron-icon {
-              display: none;
-            }
+
 
 
 
@@ -52,8 +50,10 @@ class TaskStatusBadge extends PolymerElement {
 
     <div id="wrapper">
       <span>[[status]]</span>
-      <iron-icon icon="vaadin:check"></iron-icon>
+
     </div>
+
+
 `;
   }
 

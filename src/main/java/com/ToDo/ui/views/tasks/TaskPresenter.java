@@ -56,7 +56,6 @@ public class TaskPresenter {
         view.getOpenedTaskDetails().addCancelListener(e -> cancel());
         view.getOpenedTaskDetails().addBackListener(e -> back());
         view.getOpenedTaskDetails().addEditListener(e -> edit());
-        view.getOpenedTaskDetails().addCommentListener(e -> addComment(e.getMessage()));
     }
 
     TaskCardHeader getHeaderByTaskId(Long id) {
@@ -136,12 +135,7 @@ public class TaskPresenter {
         }
     }
 
-    void addComment(String comment) {
-        if (entityPresenter.executeUpdate(e -> toDoItemService.addComment(currentUser.getUser(), e, comment))) {
-            // You can only add comments when in view mode, so reopening in that state.
-            open(entityPresenter.getEntity(), false);
-        }
-    }
+
 
     void back() {
         view.setDialogElementsVisibility(true);

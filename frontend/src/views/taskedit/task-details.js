@@ -126,10 +126,14 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
           <h3>[[item.title]]</h3>
         </vaadin-form-item>
 
+
+
         <vaadin-form-item>
           <label slot="label">Status</label>
           <h3>[[item.status]]</h3>
         </vaadin-form-item>
+
+
 
         <vaadin-form-item colspan="2">
                   <label slot="label">Priority</label>
@@ -150,13 +154,6 @@ class TaskDetails extends window.ScrollShadowMixin(PolymerElement) {
         <div></div>
 
         <vaadin-form-layout id="form4" colspan="2">
-
-
-
-
-
-
-
 
         </vaadin-form-layout>
       </vaadin-form-layout>

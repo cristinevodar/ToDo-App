@@ -1,6 +1,7 @@
 package com.ToDo.ui.views.taskedit;
 
 
+import com.ToDo.backend.data.entity.Priority;
 import com.ToDo.backend.data.entity.Status;
 import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.data.entity.User;
@@ -32,6 +33,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.vaadin.gatanaso.MultiselectComboBox;
 
 import java.time.LocalTime;
 import java.util.SortedSet;
@@ -67,7 +69,7 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
     private TextField description;
 
     @Id("priority")
-    private TextField priority;
+    private ComboBox<Priority> priority;
 
     @Id("users")
     private TextField users;
@@ -89,6 +91,7 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
 
 
 
+
     private User currentUser;
 
     private BeanValidationBinder<ToDoItem> binder = new BeanValidationBinder<>(ToDoItem.class);
@@ -106,15 +109,28 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
         status.addValueChangeListener(
                 e -> getModel().setState(DataProviderUtil.convertIfNotNull(e.getValue(), Status::name)));
         binder.forField(status)
-                .withValidator(new BeanValidator(ToDoItem.class, "status"))//TODO sau state?
+                .withValidator(new BeanValidator(ToDoItem.class, "status"))
                 .bind(ToDoItem::getStatus, (o, s) -> {
                     o.changeStatus(currentUser, s);
                 });
 
+        priority.setItemLabelGenerator(createItemLabelGenerator(Priority::getDisplayName));
+        priority.setDataProvider(DataProvider.ofItems(Priority.values()));
+
+
+        binder.forField(priority)
+                .withValidator(new BeanValidator(ToDoItem.class, "priority"))
+                .bind(ToDoItem::getPriority, (o, s) -> {
+                    o.changePriority(currentUser, s);
+                });
+
+
+
+
         dueDate.setRequired(true);
         binder.bind(dueDate, "dueDate");
 
-        SortedSet<LocalTime> timeValues = IntStream.rangeClosed(8, 16).mapToObj(i -> LocalTime.of(i, 0))
+        SortedSet<LocalTime> timeValues = IntStream.rangeClosed(0, 23).mapToObj(i -> LocalTime.of(i, 0))
                 .collect(Collectors.toCollection(TreeSet::new));
         dueTime.setItems(timeValues);
         dueTime.setItemLabelGenerator(localTimeConverter::encode);
@@ -129,7 +145,7 @@ public class TaskEditor extends PolymerTemplate<TaskEditor.Model> {
         description.setRequired(false);
         binder.bind(description,"description");
 
-        title.setRequired(true);
+        priority.setRequired(true);
         binder.bind(priority,"priority");
 
         binder.addValueChangeListener(e -> {

@@ -1,8 +1,8 @@
 package com.ToDo.backend.data;
 
 public class Role {
-	public static final String BARISTA = "barista";
-	public static final String BAKER = "baker";
+	public static final String USER = "user";
+
 	// This role implicitly allows access to all views.
 	public static final String ADMIN = "admin";
 
@@ -11,7 +11,7 @@ public class Role {
 	}
 
 	public static String[] getAllRoles() {
-		return new String[] { BARISTA, BAKER, ADMIN };
+		return new String[] { USER, ADMIN };
 	}
 
 }

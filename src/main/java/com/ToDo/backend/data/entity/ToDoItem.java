@@ -21,7 +21,7 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
 
     private String title;
     private String description;
-    private String priority;
+    private Priority priority;
     private LocalDate dueDate;
     private LocalTime dueTime;
     private Status status;
@@ -29,6 +29,7 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
     private String hash;
     private String createdBy;
     private String userEmail;
+    private boolean notificationSent;
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @OrderColumn
@@ -54,8 +55,12 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
     public void changeStatus(User user, Status status) {
         boolean createHistory = this.status != status && this.status != null && status != null;
         this.status = status;
-        if (createHistory) {
-            addHistoryItem(user, "Task " + status);
-        }
+
+    }
+
+    public void changePriority(User user, Priority priority) {
+        boolean createHistory = this.priority != priority && this.priority != null && priority != null;
+        this.priority = priority;
+
     }
 }

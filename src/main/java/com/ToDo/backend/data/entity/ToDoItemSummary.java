@@ -15,4 +15,6 @@ public interface ToDoItemSummary {
 
     Status getStatus();
 
+    Priority getPriority();
+
 }

@@ -1,6 +1,5 @@
 package com.ToDo.ui.views.dashboardtask;
 
-import com.ToDo.backend.data.DashboardData;
 import com.ToDo.backend.data.DashboardDataTasks;
 import com.ToDo.backend.data.FinishedStats;
 import com.ToDo.backend.data.entity.Status;
@@ -11,8 +10,6 @@ import com.ToDo.ui.MainView;
 import com.ToDo.ui.dataproviders.TasksGridDataProvider;
 import com.ToDo.ui.utils.BakeryConst;
 import com.ToDo.ui.utils.FormattingUtils;
-import com.ToDo.ui.views.dashboard.DashboardCounterLabel;
-import com.ToDo.ui.views.dashboard.DataSeriesItemWithRadius;
 import com.ToDo.ui.views.tasks.TaskCard;
 import com.ToDo.ui.views.tasks.beans.TasksCountDataWithChart;
 import com.vaadin.flow.component.Tag;
@@ -207,7 +204,7 @@ public class DashboardTaskView extends PolymerTemplate<TemplateModel> {
         conf.getChart().setType(ChartType.AREASPLINE);
         conf.getChart().setBorderRadius(4);
 
-        conf.setTitle("Sales last years");
+        conf.setTitle("Tasks finished last years");
 
         conf.getxAxis().setVisible(false);
         conf.getxAxis().setCategories(MONTH_LABELS);

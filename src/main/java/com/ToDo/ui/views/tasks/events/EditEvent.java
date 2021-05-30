@@ -1,4 +1,4 @@
-package com.ToDo.ui.views.storefront.events;
+package com.ToDo.ui.views.tasks.events;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;

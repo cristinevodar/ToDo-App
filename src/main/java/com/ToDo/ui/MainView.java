@@ -1,14 +1,15 @@
 package com.ToDo.ui;
 
 //import com.ToDo.app.security.SecurityUtils;
+
+import com.ToDo.app.security.CurrentUser;
 import com.ToDo.app.security.SecurityUtils;
+import com.ToDo.backend.data.entity.UserSession;
 import com.ToDo.ui.utils.BakeryConst;
 import com.ToDo.ui.views.HasConfirmation;
-import com.ToDo.ui.views.admin.products.ProductsView;
+import com.ToDo.ui.views.about.AboutView;
 import com.ToDo.ui.views.admin.users.UsersView;
-import com.ToDo.ui.views.dashboard.DashboardView;
 import com.ToDo.ui.views.dashboardtask.DashboardTaskView;
-import com.ToDo.ui.views.storefront.StorefrontView;
 import com.ToDo.ui.views.tasks.TasksView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
@@ -25,113 +26,120 @@ import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.ToDo.ui.utils.BakeryConst.TITLE_USERS;
+
 @Viewport(BakeryConst.VIEWPORT)
 @PWA(name = "ToDo-App Starter", shortName = "ToDo App",
-		startPath = "login",
-		backgroundColor = "#227aef", themeColor = "#227aef",
-		offlinePath = "offline-page.html",
-		offlineResources = {"images/offline-login-banner.jpg"},
-		enableInstallPrompt = false)
+        startPath = "login",
+        backgroundColor = "#227aef", themeColor = "#227aef",
+        offlinePath = "offline-page.html",
+        offlineResources = {"images/offline-login-banner.jpg"},
+        enableInstallPrompt = false)
+
 public class MainView extends AppLayout {
 
-	private final ConfirmDialog confirmDialog = new ConfirmDialog();
-	private final Tabs menu;
 
-	public MainView() {
-		confirmDialog.setCancelable(true);
-		confirmDialog.setConfirmButtonTheme("raised tertiary error");
-		confirmDialog.setCancelButtonTheme("raised tertiary");
+    private final ConfirmDialog confirmDialog = new ConfirmDialog();
+    private final Tabs menu;
 
-		this.setDrawerOpened(false);
-		Span appName = new Span("To Do App");
-		appName.addClassName("hide-on-mobile");
+    public MainView() {
+        confirmDialog.setCancelable(true);
+        confirmDialog.setConfirmButtonTheme("raised tertiary error");
+        confirmDialog.setCancelButtonTheme("raised tertiary");
 
-		menu = createMenuTabs();
+        this.setDrawerOpened(false);
+        Span appName = new Span("To Do App");
+        appName.addClassName("hide-on-mobile");
 
-		this.addToNavbar(appName);
-		this.addToNavbar(true, menu);
-		this.getElement().appendChild(confirmDialog.getElement());
+        menu = createMenuTabs();
 
-		getElement().addEventListener("search-focus", e -> {
-			getElement().getClassList().add("hide-navbar");
-		});
+        this.addToNavbar(appName);
+        this.addToNavbar(true, menu);
+        this.getElement().appendChild(confirmDialog.getElement());
 
-		getElement().addEventListener("search-blur", e -> {
-			getElement().getClassList().remove("hide-navbar");
-		});
-	}
+        getElement().addEventListener("search-focus", e -> {
+            getElement().getClassList().add("hide-navbar");
+        });
 
-	@Override
-	protected void afterNavigation() {
-		super.afterNavigation();
-		confirmDialog.setOpened(false);
-		if (getContent() instanceof HasConfirmation) {
-			((HasConfirmation) getContent()).setConfirmDialog(confirmDialog);
-		}
-		RouteConfiguration configuration = RouteConfiguration.forSessionScope();
-		if (configuration.isRouteRegistered(this.getContent().getClass())) {
-			String target = configuration.getUrl(this.getContent().getClass());
-			Optional < Component > tabToSelect = menu.getChildren().filter(tab -> {
-				Component child = tab.getChildren().findFirst().get();
-				return child instanceof RouterLink && ((RouterLink) child).getHref().equals(target);
-			}).findFirst();
-			tabToSelect.ifPresent(tab -> menu.setSelectedTab((Tab) tab));
-		} else {
-			menu.setSelectedTab(null);
-		}
-	}
+        getElement().addEventListener("search-blur", e -> {
+            getElement().getClassList().remove("hide-navbar");
+        });
+    }
 
-	private static Tabs createMenuTabs() {
-		final Tabs tabs = new Tabs();
-		tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
-		tabs.add(getAvailableTabs());
-		return tabs;
-	}
+    @Override
+    protected void afterNavigation() {
+        super.afterNavigation();
+        confirmDialog.setOpened(false);
+        if (getContent() instanceof HasConfirmation) {
+            ((HasConfirmation) getContent()).setConfirmDialog(confirmDialog);
+        }
+        RouteConfiguration configuration = RouteConfiguration.forSessionScope();
+        if (configuration.isRouteRegistered(this.getContent().getClass())) {
+            String target = configuration.getUrl(this.getContent().getClass());
+            Optional<Component> tabToSelect = menu.getChildren().filter(tab -> {
+                Component child = tab.getChildren().findFirst().get();
+                return child instanceof RouterLink && ((RouterLink) child).getHref().equals(target);
+            }).findFirst();
+            tabToSelect.ifPresent(tab -> menu.setSelectedTab((Tab) tab));
+        } else {
+            menu.setSelectedTab(null);
+        }
+    }
 
-	private static Tab[] getAvailableTabs() {
-		final List<Tab> tabs = new ArrayList<>(6);
-		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_STOREFRONT,
-						StorefrontView.class));
-		tabs.add(createTab(VaadinIcon.CLOCK, BakeryConst.TITLE_DASHBOARD, DashboardView.class));
+    private static Tabs createMenuTabs() {
+        final Tabs tabs = new Tabs();
+        tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
+        tabs.add(getAvailableTabs());
+        return tabs;
+    }
 
-		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_TASKS,
-				TasksView.class));
-		tabs.add(createTab(VaadinIcon.CLOCK, "TaskDashboard", DashboardTaskView.class));
-		tabs.add(createTab(VaadinIcon.USER, BakeryConst.TITLE_USERS, UsersView.class));
+    private static Tab[] getAvailableTabs() {
+        final List<Tab> tabs = new ArrayList<>(6);
+//		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_STOREFRONT,
+//						StorefrontView.class));
 
-			tabs.add(createTab(VaadinIcon.CALENDAR, BakeryConst.TITLE_PRODUCTS, ProductsView.class));
+        tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_TASKS,
+                TasksView.class));
+        tabs.add(createTab(VaadinIcon.CLOCK, "TaskDashboard", DashboardTaskView.class));
+            tabs.add(createTab(VaadinIcon.USER, TITLE_USERS, UsersView.class));
+        tabs.add(createTab(VaadinIcon.BOOK, "About", AboutView.class));
 
-		final String contextPath = VaadinServlet.getCurrent().getServletContext().getContextPath();
-		final Tab logoutTab = createTab(createLogoutLink(contextPath));
-		tabs.add(logoutTab);
-		return tabs.toArray(new Tab[tabs.size()]);
-	}
+//			tabs.add(createTab(VaadinIcon.CALENDAR, BakeryConst.TITLE_PRODUCTS, ProductsView.class));
 
-	private static Tab createTab(VaadinIcon icon, String title, Class<? extends Component> viewClass) {
-		return createTab(populateLink(new RouterLink(null, viewClass), icon, title));
-	}
+        final String contextPath = VaadinServlet.getCurrent().getServletContext().getContextPath();
+        final Tab logoutTab = createTab(createLogoutLink(contextPath));
+        tabs.add(logoutTab);
+        return tabs.toArray(new Tab[tabs.size()]);
+    }
 
-	private static Tab createTab(Component content) {
-		final Tab tab = new Tab();
-		tab.addThemeVariants(TabVariant.LUMO_ICON_ON_TOP);
-		tab.add(content);
-		return tab;
-	}
+    private static Tab createTab(VaadinIcon icon, String title, Class<? extends Component> viewClass) {
+        return createTab(populateLink(new RouterLink(null, viewClass), icon, title));
+    }
 
-	private static Anchor createLogoutLink(String contextPath) {
-		final Anchor a = populateLink(new Anchor(), VaadinIcon.ARROW_RIGHT, BakeryConst.TITLE_LOGOUT);
-		a.setHref(contextPath + "/logout");
-		return a;
-	}
+    private static Tab createTab(Component content) {
+        final Tab tab = new Tab();
+        tab.addThemeVariants(TabVariant.LUMO_ICON_ON_TOP);
+        tab.add(content);
+        return tab;
+    }
 
-	private static <T extends HasComponents> T populateLink(T a, VaadinIcon icon, String title) {
-		a.add(icon.create());
-		a.add(title);
-		return a;
-	}
+    private static Anchor createLogoutLink(String contextPath) {
+        final Anchor a = populateLink(new Anchor(), VaadinIcon.ARROW_RIGHT, BakeryConst.TITLE_LOGOUT);
+        a.setHref(contextPath + "/logout");
+        return a;
+    }
+
+    private static <T extends HasComponents> T populateLink(T a, VaadinIcon icon, String title) {
+        a.add(icon.create());
+        a.add(title);
+        return a;
+    }
+
+
 }

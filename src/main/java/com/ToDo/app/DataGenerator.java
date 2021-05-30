@@ -73,12 +73,7 @@ public class DataGenerator implements HasLogger {
 
 		getLogger().info("Generating demo data");
 
-		getLogger().info("... generating users");
-		User baker = createBaker(userRepository, passwordEncoder);
-		User barista = createBarista(userRepository, passwordEncoder);
-		createAdmin(userRepository, passwordEncoder);
-		// A set of products without constrains that can be deleted
-		createDeletableUsers(userRepository, passwordEncoder);
+
 
 		getLogger().info("... generating products");
 		// A set of products that will be used for creating orders.
@@ -89,8 +84,6 @@ public class DataGenerator implements HasLogger {
 		getLogger().info("... generating pickup locations");
 		Supplier<PickupLocation> pickupLocationSupplier = createPickupLocations(pickupLocationRepository);
 
-		getLogger().info("... generating orders");
-		createOrders(orderRepository, productSupplier, pickupLocationSupplier, barista, baker);
 
 		getLogger().info("Generated demo data");
 	}
@@ -325,27 +318,14 @@ public class DataGenerator implements HasLogger {
 		return name;
 	}
 
-	private User createBaker(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return userRepository.save(
-				createUser("baker@vaadin.com", "Heidi", "Carter", passwordEncoder.encode("baker"), Role.BAKER, false));
-	}
 
-	private User createBarista(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return userRepository.save(createUser("barista@vaadin.com", "Malin", "Castro",
-				passwordEncoder.encode("barista"), Role.BARISTA, true));
-	}
 
 	private User createAdmin(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return userRepository.save(
 				createUser("admin@vaadin.com", "Göran", "Rich", passwordEncoder.encode("admin"), Role.ADMIN, true));
 	}
 
-	private void createDeletableUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		userRepository.save(
-				createUser("peter@vaadin.com", "Peter", "Bush", passwordEncoder.encode("peter"), Role.BARISTA, false));
-		userRepository
-				.save(createUser("mary@vaadin.com", "Mary", "Ocon", passwordEncoder.encode("mary"), Role.BAKER, true));
-	}
+
 
 	private User createUser(String email, String firstName, String lastName, String passwordHash, String role,
 							boolean locked) {

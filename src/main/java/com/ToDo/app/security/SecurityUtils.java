@@ -6,9 +6,12 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ToDo.backend.data.entity.UserSession;
 import com.ToDo.ui.views.errors.AccessDeniedView;
 import com.ToDo.ui.views.errors.CustomRouteNotFoundError;
 import com.ToDo.ui.views.login.LoginScreen;
+import org.hibernate.context.spi.CurrentSessionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -27,6 +30,7 @@ import com.vaadin.flow.shared.ApplicationConstants;
  *
  */
 public final class SecurityUtils {
+
 
 	private SecurityUtils() {
 		// Util methods only

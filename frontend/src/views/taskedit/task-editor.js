@@ -65,10 +65,11 @@ class TaskEditor extends window.ScrollShadowMixin(PolymerElement) {
 
           <vaadin-text-field id="description" label="Description" colspan="2"></vaadin-text-field>
 
-          <vaadin-text-field id="priority" label="Priority" colspan="2"></vaadin-text-field>
+          <vaadin-combo-box label="Priority" id="priority" colspan="2"></vaadin-combo-box>
 
           <vaadin-text-field id="users" label="Add Users" colspan="2"></vaadin-text-field>
 
+<multi-select-combo-box items='["Item 1", "Item 2", "Item 3", "Item 4"]' label="Add Users" colspan="2"></multi-select-combo-box>
 
         </vaadin-form-layout>
 

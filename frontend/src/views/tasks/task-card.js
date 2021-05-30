@@ -149,7 +149,7 @@ class TaskCard extends PolymerElement {
         <div class="name-items">
                   <h3 class="title">[[taskCard.title]]</h3>
                   <task-status-badge status=[[taskCard.status]]></task-status-badge>
-
+                   <h3 class="priority">[[taskCard.priority]] priority</h3>
             </div>
 `;
   }
