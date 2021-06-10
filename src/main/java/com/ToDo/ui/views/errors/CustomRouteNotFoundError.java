@@ -2,7 +2,7 @@ package com.ToDo.ui.views.errors;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -17,7 +17,7 @@ import com.vaadin.flow.router.RouterLink;
 import com.ToDo.ui.MainView;
 
 @ParentLayout(MainView.class)
-@PageTitle(BakeryConst.TITLE_NOT_FOUND)
+@PageTitle(TasksConst.TITLE_NOT_FOUND)
 @JsModule("./styles/shared-styles.js")
 public class CustomRouteNotFoundError extends RouteNotFoundError {
 

@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.springframework.data.domain.Sort;
 
-public class BakeryConst {
+public class TasksConst {
 
 	public static final Locale APP_LOCALE = Locale.US;
 

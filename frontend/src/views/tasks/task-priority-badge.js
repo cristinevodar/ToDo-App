@@ -2,7 +2,7 @@ import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@vaadin/vaadin-icons/vaadin-icons.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-class OrderStatusBadge extends PolymerElement {
+class TaskPriorityBadge extends PolymerElement {
   static get template() {
     return html`
     <style>
@@ -16,29 +16,24 @@ class OrderStatusBadge extends PolymerElement {
         text-transform: capitalize;
       }
 
-      :host([status="ready"]) #wrapper {
-        color: var(--lumo-success-color);
-        background: var(--lumo-success-color-10pct);
-      }
-
-      :host([status="new"]) #wrapper {
-        color: var(--lumo-primary-color);
-        background: var(--lumo-primary-color-10pct);
-      }
-
-      :host([status="problem"]) #wrapper {
+      :host([priority="high"]) #wrapper {
         color: var(--lumo-error-color);
         background: var(--lumo-error-color-10pct);
       }
 
-      :host([status="delivered"]) #wrapper {
-        padding: 2px 8px;
+      :host([priority="medium"]) #wrapper {
+        color: var(--lumo-primary-color);
+        background: var(--lumo-primary-color-10pct);
       }
 
-      :host([status="delivered"]) #wrapper span,
-      :host(:not([status="delivered"])) #wrapper iron-icon {
-        display: none;
-      }
+      :host([priority="low"]) #wrapper , #wrapper2{
+             color: var(--lumo-secondary-text-color);
+             background: var(--lumo-primary-color-10pct);
+            }
+
+
+
+
 
       :host([small]) #wrapper {
         padding: 0 5px;
@@ -54,29 +49,31 @@ class OrderStatusBadge extends PolymerElement {
     </style>
 
     <div id="wrapper">
-      <span>[[status]]</span>
-      <iron-icon icon="vaadin:check"></iron-icon>
+      <span>Priority: [[priority]]</span>
+
     </div>
+
+
 `;
   }
 
   static get is() {
-    return 'order-status-badge';
+    return 'task-priority-badge';
   }
 
   static get properties() {
-    return {
-      status: {
-        type: String,
-        observer: '_onStatusChanged',
-        reflectToAttribute: true
-      },
-    };
-  }
+      return {
+        priority: {
+          type: String,
+          observer: '_onStatusChanged',
+          reflectToAttribute: true
+        },
+      };
+    }
 
-  _onStatusChanged(current) {
-    this.status = current && current.toLowerCase();
-  }
+    _onStatusChanged(current) {
+      this.priority = current && current.toLowerCase();
+    }
 }
 
-window.customElements.define(OrderStatusBadge.is, OrderStatusBadge);
+window.customElements.define(TaskPriorityBadge.is, TaskPriorityBadge);

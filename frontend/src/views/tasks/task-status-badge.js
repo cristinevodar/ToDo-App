@@ -49,7 +49,7 @@ class TaskStatusBadge extends PolymerElement {
     </style>
 
     <div id="wrapper">
-      <span>[[status]]</span>
+      <span>status: [[status]]</span>
 
     </div>
 

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,8 +21,10 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
 
 
 
+    @NotBlank(message = "title cannot be empty")
     private String title;
     private String description;
+    @NotNull(message = "please  choose a priority")
     private Priority priority;
     private LocalDate dueDate;
     private LocalTime dueTime;
@@ -31,21 +35,7 @@ public class ToDoItem extends AbstractEntity implements ToDoItemSummary {
     private String userEmail;
     private boolean notificationSent;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @OrderColumn
-//    @JoinColumn
-   // private List<HistoryItem> history;
 
-//    public void addHistoryItem(User createdBy, String comment) {
-//        HistoryItem item = new HistoryItem(createdBy, comment);
-//        if (history == null) {
-//            history = new LinkedList<>();
-//        }
-//        history.add(item);
-//    }
-    public void addHistoryItem(User createdBy, String comment) {
-        return ;
-    }
 
     public ToDoItem(){
         this.status=Status.NEW;

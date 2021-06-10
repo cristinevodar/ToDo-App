@@ -1,7 +1,7 @@
 package com.ToDo.ui.views.login;
 
 import com.ToDo.app.security.SecurityUtils;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.ToDo.ui.views.tasks.TasksView;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Anchor;
@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 @Route
 @PageTitle("ToDo App")
 @JsModule("./styles/shared-styles.js")
-@Viewport(BakeryConst.VIEWPORT)
+@Viewport(TasksConst.VIEWPORT)
 public class LoginScreen extends VerticalLayout
 	implements AfterNavigationObserver, BeforeEnterObserver {
 

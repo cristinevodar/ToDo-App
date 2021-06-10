@@ -2,7 +2,7 @@ package com.ToDo.ui.views.errors;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
@@ -18,7 +18,7 @@ import com.ToDo.ui.exceptions.AccessDeniedException;
 @Tag("access-denied-view")
 @JsModule("./src/views/errors/access-denied-view.js")
 @ParentLayout(MainView.class)
-@PageTitle(BakeryConst.TITLE_ACCESS_DENIED)
+@PageTitle(TasksConst.TITLE_ACCESS_DENIED)
 public class AccessDeniedView extends PolymerTemplate<TemplateModel> implements HasErrorParameter<AccessDeniedException> {
 
 	@Override

@@ -1,6 +1,7 @@
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '../../../styles/shared-styles.js';
 import './task-status-badge.js';
+import './task-priority-badge.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class TaskCard extends PolymerElement {
   static get template() {
@@ -148,8 +149,8 @@ class TaskCard extends PolymerElement {
         </div>
         <div class="name-items">
                   <h3 class="title">[[taskCard.title]]</h3>
-                  <task-status-badge status=[[taskCard.status]]></task-status-badge>
-                   <h3 class="priority">[[taskCard.priority]] priority</h3>
+                  <task-status-badge  status=[[taskCard.status]]></task-status-badge>
+                  <task-priority-badge priority=[[taskCard.priority]]> </task-priority-badge=>
             </div>
 `;
   }

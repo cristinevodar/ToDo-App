@@ -6,12 +6,11 @@ import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.service.ToDoItemService;
 import com.ToDo.ui.crud.EntityPresenter;
 import com.ToDo.ui.dataproviders.TasksGridDataProvider;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.ToDo.ui.views.tasks.beans.TaskCardHeader;
 import com.vaadin.flow.component.Focusable;
 import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -81,7 +80,7 @@ public class TaskPresenter {
     }
 
     void edit() {
-        UI.getCurrent().navigate(BakeryConst.PAGE_TASKS_EDIT + "/" + entityPresenter.getEntity().getId());
+        UI.getCurrent().navigate(TasksConst.PAGE_TASKS_EDIT + "/" + entityPresenter.getEntity().getId());
     }
 
 

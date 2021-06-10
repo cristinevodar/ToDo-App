@@ -1,7 +1,7 @@
 package com.ToDo.app.security;
 
 import com.ToDo.backend.data.entity.UserSession;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.vaadin.flow.server.ServletHelper;
 import com.vaadin.flow.shared.ApplicationConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,9 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.ToDo.backend.data.Role;
 import com.ToDo.backend.data.entity.User;
 import com.ToDo.backend.repositories.UserRepository;
 
@@ -41,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private static final String LOGIN_PROCESSING_URL = "/login";
 	private static final String LOGIN_FAILURE_URL = "/login?error";
 	private static final String LOGIN_URL = "/login";
-	private static final String LOGOUT_URL = "/" + BakeryConst.PAGE_TASKS;
-	private static final String LOGOUT_SUCCESS_URL = "/" + BakeryConst.PAGE_TASKS;
+	private static final String LOGOUT_URL = "/" + TasksConst.PAGE_TASKS;
+	private static final String LOGOUT_SUCCESS_URL = "/" + TasksConst.PAGE_TASKS;
 
 	private final UserDetailsService userDetailsService;
 

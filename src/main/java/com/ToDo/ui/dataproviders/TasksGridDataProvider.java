@@ -2,7 +2,7 @@ package com.ToDo.ui.dataproviders;
 
 import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.service.ToDoItemService;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.data.provider.QuerySortOrder;
 import com.vaadin.flow.data.provider.QuerySortOrderBuilder;
@@ -56,7 +56,7 @@ public class TasksGridDataProvider extends FilterablePageableDataProvider<ToDoIt
     @Autowired
     public TasksGridDataProvider(ToDoItemService toDoItemService) {
         this.toDoItemService = toDoItemService;
-        setSortOrders(BakeryConst.DEFAULT_SORT_DIRECTION, BakeryConst.ORDER_SORT_FIELDS);
+        setSortOrders(TasksConst.DEFAULT_SORT_DIRECTION, TasksConst.ORDER_SORT_FIELDS);
     }
 
 

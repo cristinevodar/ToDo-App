@@ -5,7 +5,7 @@ import '@vaadin/vaadin-charts/vaadin-chart.js';
 import '@vaadin/vaadin-grid/src/vaadin-grid.js';
 import '../../../styles/shared-styles.js';
 import '../../../styles/bakery-charts-theme.js';
-import '../storefront/order-card.js';
+import '../tasks/task-card.js';
 import './dashboard-counter-label.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 class DashboardView extends PolymerElement {

@@ -1,9 +1,10 @@
 package com.ToDo.ui.views.admin.users;
 
-import com.ToDo.backend.data.entity.UserSession;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.backend.data.Role;
+import com.ToDo.ui.utils.TasksConst;
+import com.vaadin.flow.data.provider.DataProvider;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -14,20 +15,16 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.provider.DataProvider;
-import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.ToDo.app.security.CurrentUser;
-import com.ToDo.backend.data.Role;
 import com.ToDo.backend.data.entity.User;
 import com.ToDo.backend.service.UserService;
 import com.ToDo.ui.MainView;
 import com.ToDo.ui.crud.AbstractBakeryCrudView;
-import org.springframework.stereotype.Component;
 
-@Route(value = BakeryConst.PAGE_USERS, layout = MainView.class)
-@PageTitle(BakeryConst.TITLE_USERS)
+@Route(value = TasksConst.PAGE_USERS, layout = MainView.class)
+@PageTitle(TasksConst.TITLE_USERS)
 public class UsersView extends AbstractBakeryCrudView<User> {
 
 
@@ -49,7 +46,7 @@ public class UsersView extends AbstractBakeryCrudView<User> {
 
     @Override
     protected String getBasePage() {
-        return BakeryConst.PAGE_USERS;
+        return TasksConst.PAGE_USERS;
     }
 
     private static BinderCrudEditor<User> createForm(PasswordEncoder passwordEncoder) {

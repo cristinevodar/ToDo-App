@@ -40,22 +40,25 @@ public class ToDoItemService implements CrudService<ToDoItem> {
     public ToDoItem save(User currentUser, ToDoItem toDoItem) {
 
         toDoItem.setCreatedBy(currentUser.getEmail());
-        if ( toDoItem.getHash()==null) {
+        if (toDoItem.getHash() == null) {
             if (!toDoItem.getUsers().isEmpty()) {
                 toDoItem.setHash(UUID.randomUUID().toString());
-                ToDoItem task2 = new ToDoItem();
-                task2.setUserEmail(toDoItem.getUsers());
-                task2.setTitle(toDoItem.getTitle());
-                task2.setDescription(toDoItem.getDescription());
-                task2.setPriority(toDoItem.getPriority());
-                task2.setDueTime(toDoItem.getDueTime());
-                task2.setDueDate(toDoItem.getDueDate());
-                task2.setHash(toDoItem.getHash());
-                toDoItemRepository.save(task2);
+
+                List<String> users = Arrays.asList(toDoItem.getUsers().split(","));
+                for (String user : users) {
+                    ToDoItem task2 = new ToDoItem();
+                    task2.setUserEmail(user);
+                    task2.setTitle(toDoItem.getTitle());
+                    task2.setDescription(toDoItem.getDescription());
+                    task2.setPriority(toDoItem.getPriority());
+                    task2.setDueTime(toDoItem.getDueTime());
+                    task2.setDueDate(toDoItem.getDueDate());
+                    task2.setHash(toDoItem.getHash());
+                    toDoItemRepository.save(task2);
+                }
             }
-        }
-        else {
-            for ( ToDoItem task2: toDoItemRepository.findByHashAndUserEmailIsNot(toDoItem.getHash(),toDoItem.getUserEmail())){
+        } else {
+            for (ToDoItem task2 : toDoItemRepository.findByHashAndUserEmailIsNot(toDoItem.getHash(), toDoItem.getUserEmail())) {
                 task2.setTitle(toDoItem.getTitle());
                 task2.setDescription(toDoItem.getDescription());
                 task2.setPriority(toDoItem.getPriority());
@@ -124,7 +127,6 @@ public class ToDoItemService implements CrudService<ToDoItem> {
             return toDoItemRepository.countByUserEmailIs(currentUser.getUser().getEmail());
         }
     }
-
 
 
     @Override

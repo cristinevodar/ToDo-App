@@ -2,10 +2,7 @@ package com.ToDo.ui;
 
 //import com.ToDo.app.security.SecurityUtils;
 
-import com.ToDo.app.security.CurrentUser;
-import com.ToDo.app.security.SecurityUtils;
-import com.ToDo.backend.data.entity.UserSession;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.ToDo.ui.views.HasConfirmation;
 import com.ToDo.ui.views.about.AboutView;
 import com.ToDo.ui.views.admin.users.UsersView;
@@ -26,20 +23,19 @@ import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinServlet;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.ToDo.ui.utils.BakeryConst.TITLE_USERS;
+import static com.ToDo.ui.utils.TasksConst.TITLE_USERS;
 
-@Viewport(BakeryConst.VIEWPORT)
+@Viewport(TasksConst.VIEWPORT)
 @PWA(name = "ToDo-App Starter", shortName = "ToDo App",
         startPath = "login",
         backgroundColor = "#227aef", themeColor = "#227aef",
         offlinePath = "offline-page.html",
-        offlineResources = {"images/offline-login-banner.jpg"},
+        offlineResources = {"images/test.jpg"},
         enableInstallPrompt = false)
 
 public class MainView extends AppLayout {
@@ -104,7 +100,7 @@ public class MainView extends AppLayout {
 //		tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_STOREFRONT,
 //						StorefrontView.class));
 
-        tabs.add(createTab(VaadinIcon.EDIT, BakeryConst.TITLE_TASKS,
+        tabs.add(createTab(VaadinIcon.EDIT, TasksConst.TITLE_TASKS,
                 TasksView.class));
         tabs.add(createTab(VaadinIcon.CLOCK, "TaskDashboard", DashboardTaskView.class));
             tabs.add(createTab(VaadinIcon.USER, TITLE_USERS, UsersView.class));
@@ -130,7 +126,7 @@ public class MainView extends AppLayout {
     }
 
     private static Anchor createLogoutLink(String contextPath) {
-        final Anchor a = populateLink(new Anchor(), VaadinIcon.ARROW_RIGHT, BakeryConst.TITLE_LOGOUT);
+        final Anchor a = populateLink(new Anchor(), VaadinIcon.ARROW_RIGHT, TasksConst.TITLE_LOGOUT);
         a.setHref(contextPath + "/logout");
         return a;
     }

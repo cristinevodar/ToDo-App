@@ -5,7 +5,7 @@ import com.ToDo.backend.data.entity.ToDoItem;
 import com.ToDo.backend.data.entity.util.EntityUtil;
 import com.ToDo.ui.MainView;
 import com.ToDo.ui.components.SearchBar;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.ToDo.ui.views.EntityView;
 import com.ToDo.ui.views.taskedit.TaskDetails;
 import com.ToDo.ui.views.taskedit.TaskEditor;
@@ -27,10 +27,10 @@ import java.util.stream.Stream;
 
 @Tag("tasks-view")
 @JsModule("./src/views/tasks/tasks-view.js")
-@Route(value = BakeryConst.PAGE_TASKS, layout = MainView.class)
-@RouteAlias(value = BakeryConst.PAGE_TASKS_EDIT, layout = MainView.class)
-@RouteAlias(value = BakeryConst.PAGE_ROOT, layout = MainView.class)
-@PageTitle(BakeryConst.TITLE_TASKS)
+@Route(value = TasksConst.PAGE_TASKS, layout = MainView.class)
+@RouteAlias(value = TasksConst.PAGE_TASKS_EDIT, layout = MainView.class)
+@RouteAlias(value = TasksConst.PAGE_ROOT, layout = MainView.class)
+@PageTitle(TasksConst.TITLE_TASKS)
 public class TasksView extends PolymerTemplate<TemplateModel>
         implements HasLogger, HasUrlParameter<Long>, EntityView<ToDoItem> {
 
@@ -68,7 +68,7 @@ public class TasksView extends PolymerTemplate<TemplateModel>
                 .withProperty("taskCard", TaskCard::create)
                 .withProperty("header", task -> presenter.getHeaderByTaskId(task.getId()))
                 .withEventHandler("cardClick",
-                        task -> UI.getCurrent().navigate(BakeryConst.PAGE_TASKS + "/" + task.getId())));
+                        task -> UI.getCurrent().navigate(TasksConst.PAGE_TASKS + "/" + task.getId())));
 
         getSearchBar().addFilterChangeListener(
                 e -> presenter.filterChanged(getSearchBar().getFilter(), getSearchBar().isCheckboxChecked()));
@@ -91,7 +91,7 @@ public class TasksView extends PolymerTemplate<TemplateModel>
     }
 
     void navigateToMainView() {
-        getUI().ifPresent(ui -> ui.navigate(BakeryConst.PAGE_TASKS));
+        getUI().ifPresent(ui -> ui.navigate(TasksConst.PAGE_TASKS));
     }
 
 
@@ -119,7 +119,7 @@ public class TasksView extends PolymerTemplate<TemplateModel>
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter Long toDoItemId) {
-        boolean editView = event.getLocation().getPath().contains(BakeryConst.PAGE_TASKS_EDIT);
+        boolean editView = event.getLocation().getPath().contains(TasksConst.PAGE_TASKS_EDIT);
         if (toDoItemId != null) {
             presenter.onNavigation(toDoItemId, editView);
         } else if (dialog.isOpened()) {

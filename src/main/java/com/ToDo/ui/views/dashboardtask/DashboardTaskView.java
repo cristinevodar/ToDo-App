@@ -8,7 +8,7 @@ import com.ToDo.backend.data.entity.ToDoItemSummary;
 import com.ToDo.backend.service.ToDoItemService;
 import com.ToDo.ui.MainView;
 import com.ToDo.ui.dataproviders.TasksGridDataProvider;
-import com.ToDo.ui.utils.BakeryConst;
+import com.ToDo.ui.utils.TasksConst;
 import com.ToDo.ui.utils.FormattingUtils;
 import com.ToDo.ui.views.tasks.TaskCard;
 import com.ToDo.ui.views.tasks.beans.TasksCountDataWithChart;
@@ -35,7 +35,7 @@ import java.util.stream.IntStream;
 
 @Tag("dashboard-view")
 @JsModule("./src/views/dashboard/dashboard-view.js")
-@Route(value = BakeryConst.PAGE_TASK_DASHBOARD, layout = MainView.class)
+@Route(value = TasksConst.PAGE_TASK_DASHBOARD, layout = MainView.class)
 @PageTitle("TaskDashboard")
 public class DashboardTaskView extends PolymerTemplate<TemplateModel> {
 
@@ -82,7 +82,7 @@ public class DashboardTaskView extends PolymerTemplate<TemplateModel> {
                 .withProperty("taskCard", TaskCard::create)
                 .withProperty("header", order -> null)
                 .withEventHandler("cardClick",
-                        task-> UI.getCurrent().navigate(BakeryConst.PAGE_TASKS + "/" + task.getId())));
+                        task-> UI.getCurrent().navigate(TasksConst.PAGE_TASKS + "/" + task.getId())));
 
         grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.setDataProvider(tasksDataProvider);
